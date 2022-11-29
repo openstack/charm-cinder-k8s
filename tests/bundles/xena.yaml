@@ -1,4 +1,5 @@
 bundle: kubernetes
+series: jammy
 applications:
 
   mysql:
@@ -6,6 +7,7 @@ applications:
     channel: edge
     scale: 1
     trust: false
+    series: focal
 
   # Currently traefik is required for networking things.
   # If this isn't present, the units will hang at "installing agent".
@@ -14,14 +16,7 @@ applications:
     channel: 1.0/stable
     scale: 1
     trust: true
-
-  traefik-public:
-    charm: ch:traefik-k8s
-    channel: 1.0/stable
-    scale: 1
-    trust: true
-    options:
-      kubernetes-service-annotations: metallb.universe.tf/address-pool=public
+    series: focal
 
   rabbitmq:
     charm: ch:rabbitmq-k8s
@@ -50,8 +45,6 @@ applications:
 
 relations:
 - - traefik:ingress
-  - keystone:ingress-internal
-- - traefik-public:ingress
   - keystone:ingress-public
 
 - - mysql:database
@@ -62,6 +55,4 @@ relations:
 - - keystone:identity-service
   - cinder:identity-service
 - - traefik:ingress
-  - cinder:ingress-internal
-- - traefik-public:ingress
   - cinder:ingress-public
