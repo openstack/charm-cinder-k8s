@@ -25,7 +25,7 @@ applications:
 
   rabbitmq:
     charm: ch:rabbitmq-k8s
-    channel: 3.12/edge
+    channel: 3.12/candidate
     scale: 1
     trust: true
     options:
@@ -33,7 +33,7 @@ applications:
 
   keystone:
     charm: ch:keystone-k8s
-    channel: 2023.2/edge
+    channel: 2023.2/candidate
     scale: 1
     trust: true
     options:
